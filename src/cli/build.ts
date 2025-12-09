@@ -1,5 +1,7 @@
 import { exportAtok } from "../core/exporters/atok.ts";
 import { exportGoogleIME } from "../core/exporters/google_ime.ts";
+import { exportMacPlist } from "../core/exporters/macos_plist.ts";
+import { exportMacText } from "../core/exporters/macos_txt.ts";
 import { exportMicrosoftIME } from "../core/exporters/microsoft_ime.ts";
 import { loadEntries } from "./load.ts";
 
@@ -34,6 +36,16 @@ async function build() {
   await Deno.writeTextFile(
     new URL("tsukuba_ATOK.txt", OUT_DIR),
     exportAtok(entries),
+  );
+
+  await Deno.writeTextFile(
+    new URL("tsukuba_macOS.txt", OUT_DIR),
+    exportMacText(entries),
+  );
+
+  await Deno.writeTextFile(
+    new URL("tsukuba_macOS.plist", OUT_DIR),
+    exportMacPlist(entries),
   );
 }
 
