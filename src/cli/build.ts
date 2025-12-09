@@ -1,4 +1,5 @@
 import { exportGoogleIME } from "../core/exporters/google_ime.ts";
+import { exportMicrosoftIME } from "../core/exporters/microsoft_ime.ts";
 import { loadEntries } from "./load.ts";
 
 const OUT_DIR = new URL("../../build/", import.meta.url);
@@ -22,6 +23,11 @@ async function build() {
   await Deno.writeTextFile(
     new URL("tsukuba_GoogleIME.txt", OUT_DIR),
     exportGoogleIME(entries),
+  );
+
+  await Deno.writeTextFile(
+    new URL("tsukuba_Windows.txt", OUT_DIR),
+    exportMicrosoftIME(entries),
   );
 }
 
