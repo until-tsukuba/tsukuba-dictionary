@@ -1,0 +1,8 @@
+{
+  "tasks": {
+    "build": "deno run -A src/cli/build.ts"
+  },
+  "imports": {
+    "@std/csv": "jsr:@std/csv@^1.0.6"
+  }
+}
