@@ -1,0 +1,30 @@
+name: Release
+on:
+  push:
+    tags:
+      - "v*"
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Deno
+        uses: denoland/setup-deno@v2
+        with:
+          deno-version: lts
+      - name: Build
+        run: deno task build
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        with:
+          body: |
+            - Google IME は`tsukuba_GoogleIME.txt`
+            - Windows は`tsukuba_Windows.txt`
+            - macOS は`tsukuba_macOS.plist` または `tsukuba_macOS.txt`
+            - ATOK は`tsukuba_ATOK.txt`
+
+            を用いてください
+          files: |
+            build/*
+          fail_on_unmatched_files: true
